@@ -6,16 +6,19 @@ import androidx.lifecycle.viewModelScope
 import com.hermosotech.filmjoy.data.model.api.TvShowModel
 import com.hermosotech.filmjoy.domain.GetPopularTvShows
 import com.hermosotech.filmjoy.domain.GetTvShowDetails
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TvShowViewModel : ViewModel() {
+@HiltViewModel
+class TvShowViewModel @Inject constructor(
+    private val getPopularTvShows : GetPopularTvShows,
+    private val getTvShowDetails : GetTvShowDetails
+) : ViewModel() {
 
     val tvShowModelList = MutableLiveData<List<TvShowModel>>()
     val tvShow = MutableLiveData<TvShowModel>()
     val isLoading = MutableLiveData<Boolean>()
-
-    private var getPopularTvShows = GetPopularTvShows()
-    private var getTvShowDetails = GetTvShowDetails()
 
     fun onCreate() {
         viewModelScope.launch {

@@ -3,6 +3,7 @@ package com.hermosotech.filmjoy.data.network
 import com.hermosotech.filmjoy.data.model.api.PopularTvShowsResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
+import javax.inject.Inject
 
 interface TvShowApiClient {
 

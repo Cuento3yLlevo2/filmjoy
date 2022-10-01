@@ -6,8 +6,9 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.hermosotech.filmjoy.databinding.ActivityMainBinding
 import com.hermosotech.filmjoy.ui.viewmodel.TvShowViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
