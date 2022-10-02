@@ -13,10 +13,10 @@ import com.hermosotech.filmjoy.data.database.entities.TvShowEntity
 interface TvShowDao {
 
     @Query("SELECT * FROM popular_tv_shows_table")
-    suspend fun getPopularTvShows() : List<TvShowEntity>
+    suspend fun getPopularTvShows(): List<TvShowEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPopularTvShowsResponse(tvShows : List<TvShowEntity>)
+    suspend fun insertPopularTvShowsResponse(tvShows: List<TvShowEntity>)
 
     @Query("DELETE FROM popular_tv_shows_table")
     suspend fun deletePopularTvShows()

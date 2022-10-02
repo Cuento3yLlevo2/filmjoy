@@ -8,11 +8,11 @@ import com.hermosotech.filmjoy.ui.viewmodel.TvShowViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
-    private val tvShowViewModel : TvShowViewModel by viewModels()
+    private val tvShowViewModel: TvShowViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

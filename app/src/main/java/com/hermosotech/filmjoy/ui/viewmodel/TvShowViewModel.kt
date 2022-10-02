@@ -12,9 +12,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TvShowViewModel @Inject constructor(
-    private val getPopularTvShows : GetPopularTvShows,
-    private val getTvShowDetails : GetTvShowDetails
-) : ViewModel() {
+    private val getPopularTvShows: GetPopularTvShows,
+    private val getTvShowDetails: GetTvShowDetails
+): ViewModel() {
 
     val popularTvShows = MutableLiveData<List<TvShow>>()
     val tvShow = MutableLiveData<TvShow>()

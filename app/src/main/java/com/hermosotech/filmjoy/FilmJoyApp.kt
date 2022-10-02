@@ -7,4 +7,4 @@ import dagger.hilt.android.HiltAndroidApp
 /**
  * Triggers Dagger component generation.
  */
-class FilmJoyApp : Application()
+class FilmJoyApp: Application()

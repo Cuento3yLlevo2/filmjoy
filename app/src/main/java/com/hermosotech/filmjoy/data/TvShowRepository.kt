@@ -12,16 +12,16 @@ import javax.inject.Inject
  * This repository will have the logic to fetch the network results, manage the offline cache and to keep the database up-to-date.
  */
 class TvShowRepository @Inject constructor(
-    private val api : TvShowService,
+    private val api: TvShowService,
     private val tvShowDao: TvShowDao
     ) {
 
-    suspend fun getPopularTvShowsResponseFromApi() : TvShowsResponse? {
+    suspend fun getPopularTvShowsResponseFromApi(): TvShowsResponse? {
         val response = api.getPopularTvShowList()
         return response.toDomain()
     }
 
-    suspend fun getPopularTvShowsFromDatabase() : List<TvShow>? {
+    suspend fun getPopularTvShowsFromDatabase(): List<TvShow>? {
         val response = tvShowDao.getPopularTvShows()
         return response.map { it.toDomain() }
     }

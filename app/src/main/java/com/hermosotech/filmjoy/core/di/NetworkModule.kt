@@ -20,7 +20,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit() : Retrofit {
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -29,7 +29,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideTvShowApiClient(retrofit: Retrofit) : TvShowApiClient {
+    fun provideTvShowApiClient(retrofit: Retrofit): TvShowApiClient {
         return retrofit.create(TvShowApiClient::class.java)
     }
 }

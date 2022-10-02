@@ -11,12 +11,12 @@ class GetPopularTvShows @Inject constructor(private val repository : TvShowRepos
     suspend operator fun invoke() : List<TvShow>? {
         val tvShowsResponse = repository.getPopularTvShowsResponseFromApi()
 
-        return tvShowsResponse?.let {
+        return if (tvShowsResponse?.results?.isNotEmpty() == true){
             repository.clearPopularTvShows()
             // Insert TvShows to Room dataBase
             repository.insertPopularTvShows(tvShowsResponse.toDatabase())
             tvShowsResponse.results
-        } ?: run {
+        } else {
             repository.getPopularTvShowsFromDatabase()
         }
     }
