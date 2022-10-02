@@ -12,6 +12,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
+/**
+ * Provides Database instance using DI.
+ */
 object RoomModule {
 
     private const val TV_SHOW_DATABASE_NAME = "tv_show_database"

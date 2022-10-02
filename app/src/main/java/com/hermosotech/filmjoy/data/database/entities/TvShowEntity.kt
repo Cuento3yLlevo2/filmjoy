@@ -8,6 +8,9 @@ import com.hermosotech.filmjoy.domain.model.TvShow
 import com.hermosotech.filmjoy.domain.model.TvShowsResponse
 
 @Entity(tableName = "popular_tv_shows_table")
+/**
+ *  Defines a TvShow data entity. Each instance of TvShow represents a row in a popular_tv_shows_table in the app's database.
+ */
 data class TvShowEntity(
     @PrimaryKey
     @ColumnInfo(name = "id") val id: Int,

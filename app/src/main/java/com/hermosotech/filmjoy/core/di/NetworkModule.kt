@@ -7,11 +7,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
+/**
+ * Provides API Client instance using DI.
+ */
 object NetworkModule {
 
     const val API_BASE_URL = "https://api.themoviedb.org/3/"
@@ -30,5 +32,4 @@ object NetworkModule {
     fun provideTvShowApiClient(retrofit: Retrofit) : TvShowApiClient {
         return retrofit.create(TvShowApiClient::class.java)
     }
-
 }

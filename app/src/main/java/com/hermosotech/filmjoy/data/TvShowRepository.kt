@@ -8,6 +8,9 @@ import com.hermosotech.filmjoy.domain.model.TvShowsResponse
 import com.hermosotech.filmjoy.domain.model.toDomain
 import javax.inject.Inject
 
+/**
+ * This repository will have the logic to fetch the network results, manage the offline cache and to keep the database up-to-date.
+ */
 class TvShowRepository @Inject constructor(
     private val api : TvShowService,
     private val tvShowDao: TvShowDao

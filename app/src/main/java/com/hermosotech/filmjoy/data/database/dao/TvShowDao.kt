@@ -7,6 +7,9 @@ import androidx.room.Query
 import com.hermosotech.filmjoy.data.database.entities.TvShowEntity
 
 @Dao
+/**
+ * Data access object that the rest of the app uses to interact with data in the TvShows table.
+ */
 interface TvShowDao {
 
     @Query("SELECT * FROM popular_tv_shows_table")
