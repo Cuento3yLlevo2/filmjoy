@@ -1,15 +1,17 @@
 package com.hermosotech.filmjoy.domain
 
-import com.hermosotech.filmjoy.data.model.TvShowProvider
-import com.hermosotech.filmjoy.data.model.api.TvShowModel
+import com.hermosotech.filmjoy.data.TvShowRepository
+import com.hermosotech.filmjoy.domain.model.TvShow
 import javax.inject.Inject
 
-class GetTvShowDetails @Inject constructor(private val tvShowProvider: TvShowProvider) {
+class GetTvShowDetails @Inject constructor(private val repository: TvShowRepository) {
 
-    operator fun invoke(index: Int): TvShowModel? {
-        if (tvShowProvider.response.results.isNotEmpty()) {
-            if (index in 0 until tvShowProvider.response.results.size)
-                return tvShowProvider.response.results[index]
+    suspend operator fun invoke(index: Int): TvShow? {
+        val tvShows = repository.getPopularTvShowsFromDatabase()
+
+        if (!tvShows.isNullOrEmpty()) {
+            if (index in tvShows.indices)
+                return tvShows[index]
         }
 
         return null

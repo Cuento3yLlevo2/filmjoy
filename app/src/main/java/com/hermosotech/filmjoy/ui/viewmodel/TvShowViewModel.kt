@@ -3,9 +3,9 @@ package com.hermosotech.filmjoy.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hermosotech.filmjoy.data.model.api.TvShowModel
 import com.hermosotech.filmjoy.domain.GetPopularTvShows
 import com.hermosotech.filmjoy.domain.GetTvShowDetails
+import com.hermosotech.filmjoy.domain.model.TvShow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,8 +16,8 @@ class TvShowViewModel @Inject constructor(
     private val getTvShowDetails : GetTvShowDetails
 ) : ViewModel() {
 
-    val tvShowModelList = MutableLiveData<List<TvShowModel>>()
-    val tvShow = MutableLiveData<TvShowModel>()
+    val popularTvShows = MutableLiveData<List<TvShow>>()
+    val tvShow = MutableLiveData<TvShow>()
     val isLoading = MutableLiveData<Boolean>()
 
     fun onCreate() {
@@ -26,19 +26,21 @@ class TvShowViewModel @Inject constructor(
             val result = getPopularTvShows()
 
             result?.let {
-                tvShowModelList.postValue(it.results)
+                popularTvShows.postValue(it)
                 isLoading.postValue(false)
             }
         }
     }
 
     fun getTvShow(index: Int) {
-        isLoading.postValue(true)
-        val result = getTvShowDetails(index)
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            val result = getTvShowDetails(index)
 
-        result?.let {
-            tvShow.postValue(it)
-            isLoading.postValue(false)
+            result?.let {
+                tvShow.postValue(it)
+                isLoading.postValue(false)
+            }
         }
     }
 }

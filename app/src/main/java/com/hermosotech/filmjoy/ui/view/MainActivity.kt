@@ -3,7 +3,6 @@ package com.hermosotech.filmjoy.ui.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.hermosotech.filmjoy.databinding.ActivityMainBinding
 import com.hermosotech.filmjoy.ui.viewmodel.TvShowViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         tvShowViewModel.onCreate()
 
-        tvShowViewModel.tvShowModelList.observe(this) {
+        tvShowViewModel.popularTvShows.observe(this) {
             binding.tvHello.text = it[0].name
         }
 
