@@ -1,4 +1,4 @@
-package com.hermosotech.myapplication
+package com.hermosotech.filmjoy
 
 import org.junit.Test
 

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="316dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="@dimen/cardCornerRadius"
+    android:elevation="4dp"
+    android:layout_margin="5dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clContentTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_content_item"
+        >
+
+        <ImageView
+            android:id="@+id/ivContentCoverImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/imageViewContentHeight"
+            android:layout_marginTop="1dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_launcher_background"
+            android:contentDescription="@string/cd_content_cover_image" />
+
+        <ImageView
+            android:id="@+id/ivPopcorn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/popcorn_64px"
+            android:contentDescription="@string/cd_popcorn_image"
+            />
+
+        <TextView
+            android:id="@+id/tvContentVoteAverage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text= "7/10"
+            android:textSize="@dimen/textSizeSmall"
+            android:textStyle="bold"
+            android:textColor="@color/secondary_text"
+            app:layout_constraintStart_toEndOf="@+id/ivPopcorn"
+            app:layout_constraintTop_toTopOf="@+id/ivPopcorn"
+            app:layout_constraintBottom_toBottomOf="@+id/ivPopcorn"
+            android:gravity="center_vertical"
+            android:padding="4dp"
+            android:background="@drawable/shape_white_circle"
+            />
+
+        <View
+            android:id="@+id/vContentTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivContentCoverImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/filmJoySecondaryColor"
+            />
+
+        <TextView
+            android:id="@+id/tvContentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vContentTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Doctor Strange in the Multiverse of Madness"
+            android:textStyle="bold"
+            android:textSize="@dimen/textSizeTitle"
+            android:textColor="@color/primary_text"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:paddingTop="6dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            />
+
+        <TextView
+            android:id="@+id/tvContentFirstAirDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text= "Feb 15, 2022"
+            android:textSize="@dimen/textSizeSubtitle"
+            android:textColor="@color/primary_text"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/clContentTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="textEnd"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
