@@ -3,6 +3,7 @@ package com.hermosotech.filmjoy.ui.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hermosotech.filmjoy.databinding.ActivityMainBinding
@@ -22,9 +23,12 @@ class MainActivity: AppCompatActivity() {
     private lateinit var apiConfig : ApiConfig
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val screenSplash = installSplashScreen()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        screenSplash.setKeepOnScreenCondition { true }
 
         tvShowViewModel.onCreate()
 
@@ -39,7 +43,7 @@ class MainActivity: AppCompatActivity() {
         }
 
         tvShowViewModel.isLoading.observe(this) {
-            // binding.progress.isVisible = it
+            screenSplash.setKeepOnScreenCondition { false }
         }
 
 
@@ -53,8 +57,13 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun initRecycleView(list: List<TvShow>, imgConfig: ImageConfig) {
-        val recyclerView = binding.rvTvShows
-        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        recyclerView.adapter = TvShowAdapter(list, imgConfig)
+        binding.rvTvShows.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        binding.rvTvShows.adapter = TvShowAdapter(list, imgConfig) { tvShow ->
+            onItemSelected(tvShow)
+        }
+    }
+
+    fun onItemSelected(tvShow: TvShow){
+
     }
 }
