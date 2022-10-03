@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FilmJoy</string>
+    <string name="cd_content_cover_image">Content cover image</string>
+    <string name="cd_popcorn_image">popcorn image</string>
 </resources>

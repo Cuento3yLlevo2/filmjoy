@@ -1,8 +1,10 @@
 package com.hermosotech.filmjoy.data
 
+import android.util.Log
 import com.hermosotech.filmjoy.data.database.dao.TvShowDao
 import com.hermosotech.filmjoy.data.database.entities.TvShowEntity
 import com.hermosotech.filmjoy.data.network.TvShowService
+import com.hermosotech.filmjoy.domain.model.ApiConfig
 import com.hermosotech.filmjoy.domain.model.TvShow
 import com.hermosotech.filmjoy.domain.model.TvShowsResponse
 import com.hermosotech.filmjoy.domain.model.toDomain
@@ -18,6 +20,11 @@ class TvShowRepository @Inject constructor(
 
     suspend fun getPopularTvShowsResponseFromApi(): TvShowsResponse? {
         val response = api.getPopularTvShowList()
+        return response.toDomain()
+    }
+
+    suspend fun getApiConfigFromApi(): ApiConfig? {
+        val response = api.getApiConfig()
         return response.toDomain()
     }
 

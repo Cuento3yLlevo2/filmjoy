@@ -3,7 +3,7 @@
     <style name="Theme.FilmJoy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/filmJoyPrimaryColor</item>
-        <item name="colorPrimaryVariant">@color/filmJoyPrimaryColor</item>
+        <item name="colorPrimaryVariant">@color/filmJoyPrimaryColorDark</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/filmJoySecondaryColor</item>

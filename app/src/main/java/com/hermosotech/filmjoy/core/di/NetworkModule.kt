@@ -17,6 +17,7 @@ import javax.inject.Singleton
 object NetworkModule {
 
     const val API_BASE_URL = "https://api.themoviedb.org/3/"
+    const val API_KEY = "c6aeee577586ba38e487b74dfede5deb"
 
     @Singleton
     @Provides
