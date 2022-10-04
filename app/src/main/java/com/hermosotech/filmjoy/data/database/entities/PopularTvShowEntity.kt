@@ -3,7 +3,6 @@ package com.hermosotech.filmjoy.data.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import com.hermosotech.filmjoy.domain.model.TvShow
 import com.hermosotech.filmjoy.domain.model.TvShowsResponse
 
@@ -11,7 +10,7 @@ import com.hermosotech.filmjoy.domain.model.TvShowsResponse
 /**
  *  Defines a TvShow data entity. Each instance of TvShow represents a row in a popular_tv_shows_table in the app's database.
  */
-data class TvShowEntity(
+data class PopularTvShowEntity(
     @PrimaryKey
     @ColumnInfo(name = "id") val id: Int,
     @ColumnInfo(name = "poster_path") val posterPath: String?,
@@ -29,4 +28,4 @@ data class TvShowEntity(
 )
 
 fun TvShowsResponse.toDatabase() = results.map { it.toDatabase() }
-fun TvShow.toDatabase() = TvShowEntity(id, posterPath, popularity, backdropPath, voteAverage, overview, firstAirDate, originCountry[0], genreIds[0], originalLanguage, voteCount, name, originalName)
+fun TvShow.toDatabase() = PopularTvShowEntity(id, posterPath, popularity, backdropPath, voteAverage, overview, firstAirDate, originCountry[0], genreIds[0], originalLanguage, voteCount, name, originalName)

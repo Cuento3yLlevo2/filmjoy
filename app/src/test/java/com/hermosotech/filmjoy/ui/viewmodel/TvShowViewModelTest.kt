@@ -27,7 +27,7 @@ class TvShowViewModelTest {
     @RelaxedMockK
     private lateinit var getTvShowDetails: GetTvShowDetails
 
-    private lateinit var tvShowViewModel: TvShowViewModel
+    private lateinit var tvShowViewModel: TvShowsViewModel
 
     @get:Rule
     var rule: InstantTaskExecutorRule = InstantTaskExecutorRule()
@@ -35,7 +35,7 @@ class TvShowViewModelTest {
     @Before
     fun onBefore() {
         MockKAnnotations.init(this)
-        tvShowViewModel = TvShowViewModel(getPopularTvShows, getTvShowDetails)
+        tvShowViewModel = TvShowsViewModel(getPopularTvShows, getTvShowDetails)
         Dispatchers.setMain(Dispatchers.Unconfined)
     }
 

@@ -18,6 +18,8 @@ import javax.inject.Singleton
 object RoomModule {
 
     private const val TV_SHOW_DATABASE_NAME = "tv_show_database"
+    const val POPULAR_TV_SHOW_TABLE_NAME = "popular_tv_shows_table"
+    const val TOP_RATED_TV_SHOW_TABLE_NAME = "top_rated_tv_shows_table"
 
     @Singleton
     @Provides

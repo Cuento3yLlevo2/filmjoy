@@ -1,8 +1,8 @@
 package com.hermosotech.filmjoy.data
 
-import android.util.Log
 import com.hermosotech.filmjoy.data.database.dao.TvShowDao
-import com.hermosotech.filmjoy.data.database.entities.TvShowEntity
+import com.hermosotech.filmjoy.data.database.entities.PopularTvShowEntity
+import com.hermosotech.filmjoy.data.database.entities.TopRatedTvShowEntity
 import com.hermosotech.filmjoy.data.network.TvShowService
 import com.hermosotech.filmjoy.domain.model.ApiConfig
 import com.hermosotech.filmjoy.domain.model.TvShow
@@ -23,6 +23,11 @@ class TvShowRepository @Inject constructor(
         return response.toDomain()
     }
 
+    suspend fun getTopRatedTvShowsResponseFromApi(): TvShowsResponse? {
+        val response = api.getTopRatedTvShowList()
+        return response.toDomain()
+    }
+
     suspend fun getApiConfigFromApi(): ApiConfig? {
         val response = api.getApiConfig()
         return response.toDomain()
@@ -33,11 +38,34 @@ class TvShowRepository @Inject constructor(
         return response.map { it.toDomain() }
     }
 
-    suspend fun insertPopularTvShows(tvShows: List<TvShowEntity>) {
+    suspend fun getPopularTvShowByIdFromDatabase(id: Int): TvShow? {
+        val response = tvShowDao.getPopularTvShowByID(id.toString())
+        return response[0].toDomain()
+    }
+
+    suspend fun getTopRatedTvShowByIdFromDatabase(id: Int): TvShow? {
+        val response = tvShowDao.getTopRatedTvShowByID(id.toString())
+        return response[0].toDomain()
+    }
+
+    suspend fun getTopRatedTvShowsFromDatabase(): List<TvShow>? {
+        val response = tvShowDao.getTopRatedTvShows()
+        return response.map { it.toDomain() }
+    }
+
+    suspend fun insertPopularTvShows(tvShows: List<PopularTvShowEntity>) {
         tvShowDao.insertPopularTvShowsResponse(tvShows)
+    }
+
+    suspend fun insertTopRatedTvShows(tvShows: List<TopRatedTvShowEntity>) {
+        tvShowDao.insertTopRatedTvShowsResponse(tvShows)
     }
 
     suspend fun clearPopularTvShows() {
         tvShowDao.deletePopularTvShows()
+    }
+
+    suspend fun clearTopRatedTvShows() {
+        tvShowDao.deleteTopRatedTvShows()
     }
 }

@@ -2,4 +2,8 @@
     <string name="app_name">FilmJoy</string>
     <string name="cd_content_cover_image">Content cover image</string>
     <string name="cd_popcorn_image">popcorn image</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_popular_tv_shows">Popular Tv Shows</string>
+    <string name="home_top_tv_shows">Top Rated Tv Shows</string>
 </resources>
