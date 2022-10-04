@@ -1,7 +1,9 @@
 package com.hermosotech.filmjoy.ui.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.hermosotech.filmjoy.domain.GetApiConfiguration
 import com.hermosotech.filmjoy.domain.GetPopularTvShows
+import com.hermosotech.filmjoy.domain.GetTopRatedTvShows
 import com.hermosotech.filmjoy.domain.GetTvShowDetails
 import com.hermosotech.filmjoy.domain.model.TvShow
 import com.hermosotech.filmjoy.domain.model.TvShowsResponse
@@ -25,9 +27,13 @@ class TvShowViewModelTest {
     private lateinit var getPopularTvShows: GetPopularTvShows
 
     @RelaxedMockK
-    private lateinit var getTvShowDetails: GetTvShowDetails
+    private lateinit var getTopRatedTvShows: GetTopRatedTvShows
 
-    private lateinit var tvShowViewModel: TvShowViewModel
+    @RelaxedMockK
+    private lateinit var getApiConfiguration: GetApiConfiguration
+
+
+    private lateinit var tvShowViewModel: TvShowsViewModel
 
     @get:Rule
     var rule: InstantTaskExecutorRule = InstantTaskExecutorRule()
@@ -35,7 +41,7 @@ class TvShowViewModelTest {
     @Before
     fun onBefore() {
         MockKAnnotations.init(this)
-        tvShowViewModel = TvShowViewModel(getPopularTvShows, getTvShowDetails)
+        tvShowViewModel = TvShowsViewModel(getPopularTvShows, getTopRatedTvShows, getApiConfiguration)
         Dispatchers.setMain(Dispatchers.Unconfined)
     }
 

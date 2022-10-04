@@ -16,6 +16,13 @@ class TvShowService @Inject constructor(private val api : TvShowApiClient) {
         }
     }
 
+    suspend fun getTopRatedTvShowList() : TvShowsResponseModel {
+        return withContext(Dispatchers.IO) {
+            val response = api.getTopRatedTvShowList()
+            response.body() ?: TvShowsResponseModel(0, emptyList(), 0, 0)
+        }
+    }
+
     suspend fun getApiConfig() : ApiConfigModel {
         return withContext(Dispatchers.IO) {
             val response = api.getApiConfig()

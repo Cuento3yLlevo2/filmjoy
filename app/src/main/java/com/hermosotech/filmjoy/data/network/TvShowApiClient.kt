@@ -15,6 +15,13 @@ interface TvShowApiClient {
         @Query("page") page: Int? = 1,
     ): retrofit2.Response<TvShowsResponseModel>
 
+    @GET("tv/top_rated")
+    suspend fun getTopRatedTvShowList(
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1,
+    ): retrofit2.Response<TvShowsResponseModel>
+
     @GET("configuration")
     suspend fun getApiConfig(
         @Query("api_key") apiKey: String = API_KEY,

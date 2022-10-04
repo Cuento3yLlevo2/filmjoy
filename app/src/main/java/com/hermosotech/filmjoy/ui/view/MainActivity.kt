@@ -1,60 +1,39 @@
 package com.hermosotech.filmjoy.ui.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.hermosotech.filmjoy.R
 import com.hermosotech.filmjoy.databinding.ActivityMainBinding
-import com.hermosotech.filmjoy.domain.model.ApiConfig
-import com.hermosotech.filmjoy.domain.model.ImageConfig
-import com.hermosotech.filmjoy.domain.model.TvShow
-import com.hermosotech.filmjoy.ui.adapter.TvShowAdapter
-import com.hermosotech.filmjoy.ui.viewmodel.TvShowViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
-    private val tvShowViewModel: TvShowViewModel by viewModels()
-    private lateinit var apiConfig : ApiConfig
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        tvShowViewModel.onCreate()
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.findNavController()
 
-        tvShowViewModel.apiConfiguration.observe(this){
-            apiConfig = it
-        }
-
-        tvShowViewModel.popularTvShows.observe(this) { tvShows ->
-            apiConfig.imageConfig?.let { imgConfig ->
-                initRecycleView(tvShows, imgConfig)
-            }
-        }
-
-        tvShowViewModel.isLoading.observe(this) {
-            // binding.progress.isVisible = it
-        }
-
-
-
-        /*
-        binding.tvHello.setOnClickListener {
-            tvShowViewModel.getTvShow(3)
-        }
-         */
-
+        setSupportActionBar(binding.toolbarHome)
+        setupActionBarWithNavController(navController)
     }
 
-    private fun initRecycleView(list: List<TvShow>, imgConfig: ImageConfig) {
-        val recyclerView = binding.rvTvShows
-        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        recyclerView.adapter = TvShowAdapter(list, imgConfig)
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
