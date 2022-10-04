@@ -19,16 +19,6 @@ import com.hermosotech.filmjoy.ui.adapter.TvShowAdapter
 import com.hermosotech.filmjoy.ui.viewmodel.TvShowsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -43,7 +33,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -84,8 +74,7 @@ class HomeFragment : Fragment() {
     }
 
     fun onItemSelected(tvShow: TvShow, tableName: String){
-        val tvShowId : Int = tvShow.id
-        val action = HomeFragmentDirections.actionHomeFragmentToTvShowDetailFragment(tvShowId, tableName)
+        val action = HomeFragmentDirections.actionHomeFragmentToTvShowDetailFragment(tvShow.id, tableName, tvShow.name)
         findNavController().navigate(action)
     }
 }
