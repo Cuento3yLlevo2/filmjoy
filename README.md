@@ -2,6 +2,8 @@
 
 FilmJoy is an Android App that uses [ The Movie Database (TMDB) API](https://www.themoviedb.org/about) as content source to populate a list of the most popular and best rated tv shows available and show their details.
 
+![filmjoy demo gif](https://media.giphy.com/media/TapAlg10zAfDxXBltT/giphy.gif)
+
 ## Functionality ##
 
 The app has two fragment layouts:
