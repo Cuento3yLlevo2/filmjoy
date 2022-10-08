@@ -1,6 +1,7 @@
 package com.hermosotech.filmjoy.ui.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -40,4 +41,12 @@ class MainActivity: AppCompatActivity() {
     }
 
     fun keepSplashScreenOnScreen(keep: Boolean) = screenSplash.setKeepOnScreenCondition { keep }
+
+    fun keepProgressBarOnScreen(keep: Boolean) = run {
+        if (keep)
+            binding.rlBaseHomeProgressBar.visibility = View.VISIBLE
+        else
+            binding.rlBaseHomeProgressBar.visibility = View.INVISIBLE
+    }
+
 }

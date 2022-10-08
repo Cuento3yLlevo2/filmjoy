@@ -67,6 +67,7 @@ class HomeFragment : Fragment() {
         rv.adapter = TvShowAdapter(list, apiConfig) { tvShow ->
             onItemSelected(tvShow, tableName, context)
         }
+        (activity as MainActivity).keepProgressBarOnScreen(false)
     }
 
     fun onItemSelected(tvShow: TvShow, tableName: String, context: Context?){

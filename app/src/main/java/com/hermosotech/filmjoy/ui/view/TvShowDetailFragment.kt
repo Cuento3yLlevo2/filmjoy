@@ -35,6 +35,7 @@ class TvShowDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (activity as MainActivity).keepProgressBarOnScreen(true)
         _binding = FragmentTvShowDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -68,10 +69,8 @@ class TvShowDetailFragment : Fragment() {
                 binding.tvTvShowVoteCount.text = tvShow.voteCount.toString()
 
                 // tvShow.genreIds Todo call to api to retrieved genre by iD
-            }
 
-            tvShowDetailViewModel.isLoading.observe(viewLifecycleOwner) {
-                // todo progress bar
+                (activity as MainActivity).keepProgressBarOnScreen(false)
             }
         }
     }

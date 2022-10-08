@@ -20,19 +20,14 @@ class TvShowDetailViewModel @Inject constructor(
 ): ViewModel() {
 
     val tvShow = MutableLiveData<TvShow>()
-    val isLoading = MutableLiveData<Boolean>()
 
     fun onCreate(id : Int, tableName: String) {
         viewModelScope.launch {
-            isLoading.postValue(true)
 
             apiConfiguration()
-
             val result = getTvShowDetails(id, tableName)
-
             result?.let {
                 tvShow.postValue(it)
-                isLoading.postValue(false)
             }
         }
     }
