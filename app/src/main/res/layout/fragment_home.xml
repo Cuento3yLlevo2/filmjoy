@@ -15,8 +15,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/tvPopular"
@@ -26,21 +25,27 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:textSize="@dimen/textSizeTitle"
-                        android:layout_margin="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:textStyle="bold"
-                        android:textColor="@color/filmJoyPrimaryColor"
+                        android:elegantTextHeight="true"
+                        android:letterSpacing="0.05"
                         android:text="@string/home_popular_tv_shows"
+                        android:elevation="2dp"
+                        style="@style/sectionTitleText"
                         />
 
                     <View
                         android:id="@+id/vPopular"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvPopular"
+                        app:layout_constraintTop_toTopOf="@id/tvPopular"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="80dp"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/filmJoySecondaryColor"
+                        android:alpha="0.9"
+                        android:layout_height="225dp"
+                        style="@style/viewSeparator"
                         />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -49,7 +54,9 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/vPopular" />
+                        app:layout_constraintTop_toBottomOf="@id/tvPopular"
+                        tools:listitem="@layout/item_tv_show"
+                        tools:itemCount="1"/>
 
                     <TextView
                         android:id="@+id/tvTops"
@@ -59,21 +66,27 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/rvPopularTvShows"
                         android:textSize="@dimen/textSizeTitle"
-                        android:layout_margin="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:textStyle="bold"
-                        android:textColor="@color/filmJoyPrimaryColor"
+                        android:elegantTextHeight="true"
+                        android:letterSpacing="0.05"
                         android:text="@string/home_top_tv_shows"
+                        android:elevation="2dp"
+                        style="@style/sectionTitleText"
                         />
 
                     <View
                         android:id="@+id/vTops"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvTops"
+                        app:layout_constraintTop_toTopOf="@id/tvTops"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="80dp"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/filmJoySecondaryColor"
+                        android:alpha="0.9"
+                        android:layout_height="225dp"
+                        style="@style/viewSeparator"
                         />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -82,7 +95,9 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/vTops"
+                        app:layout_constraintTop_toBottomOf="@id/tvTops"
+                        tools:listitem="@layout/item_tv_show"
+                        tools:itemCount="1"
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

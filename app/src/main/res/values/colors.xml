@@ -3,6 +3,10 @@
     <color name="filmJoyPrimaryColorDark">#3D239A</color>
     <color name="filmJoyPrimaryColor">#884cb4</color>
     <color name="filmJoySecondaryColor">#E5E5E6</color>
+
+    <color name="filmJoyPrimaryColorDarkNight">#1A0F53</color>
+    <color name="filmJoyPrimaryColorNight">#3E3853</color>
+
     <color name="accentColor">#FA4588</color>
     <color name="tagColor">#1DA611</color>
     <color name="black">#FF000000</color>
