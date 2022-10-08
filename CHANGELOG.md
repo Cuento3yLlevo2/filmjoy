@@ -1,3 +1,7 @@
+## [1.2.0] - 2022-10-08
+### Added
+- Support for Dark Mode.
+
 ## [1.1.0] - 2022-10-08
 ### Added
 - Support for Horizontal and vertical Screen orientation.

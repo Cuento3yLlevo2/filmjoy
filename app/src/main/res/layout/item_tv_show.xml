@@ -13,7 +13,6 @@
         android:id="@+id/clContentTitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/shape_content_item"
         >
 
         <ImageView
@@ -26,7 +25,8 @@
             android:layout_marginTop="1dp"
             android:scaleType="centerCrop"
             tools:src="@drawable/ic_launcher_background"
-            android:contentDescription="@string/cd_content_cover_image" />
+            android:contentDescription="@string/cd_content_cover_image"
+            />
 
         <ImageView
             android:id="@+id/ivPopcorn"
@@ -44,15 +44,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text= "7/10"
-            android:textSize="@dimen/textSizeSmall"
             android:textStyle="bold"
-            android:textColor="@color/secondary_text"
             app:layout_constraintStart_toEndOf="@+id/ivPopcorn"
             app:layout_constraintTop_toTopOf="@+id/ivPopcorn"
             app:layout_constraintBottom_toBottomOf="@+id/ivPopcorn"
             android:gravity="center_vertical"
             android:padding="4dp"
             android:background="@drawable/shape_white_circle"
+            style="@style/smallText"
             />
 
         <View
@@ -62,7 +61,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/filmJoySecondaryColor"
+            style="@style/viewSeparator"
             />
 
         <TextView
@@ -74,13 +73,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Doctor Strange in the Multiverse of Madness"
             android:textStyle="bold"
-            android:textSize="@dimen/textSizeTitle"
-            android:textColor="@color/primary_text"
             android:ellipsize="end"
             android:maxLines="3"
-            android:paddingTop="6dp"
+            android:paddingTop="2dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
+            style="@style/primaryText"
             />
 
         <TextView
@@ -88,15 +87,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text= "Feb 15, 2022"
-            android:textSize="@dimen/textSizeSubtitle"
-            android:textColor="@color/primary_text"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:paddingBottom="4dp"
+            android:paddingBottom="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/clContentTitle"
             app:layout_constraintEnd_toEndOf="parent"
             android:textAlignment="textEnd"
+            style="@style/secondaryText"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

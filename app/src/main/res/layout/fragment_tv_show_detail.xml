@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".ui.view.TvShowDetailFragment">
 
     <ScrollView
@@ -47,10 +46,10 @@
                 android:id="@+id/clTvShowAvg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/filmJoyPrimaryColor"
                 android:alpha="0.9"
                 android:elevation="4dp"
                 android:padding="2dp"
+                style="@style/viewSeparator"
                 >
 
                 <ImageView
@@ -69,15 +68,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text= "7/10"
-                    android:textSize="@dimen/textSizeTitle"
                     android:textStyle="bold"
-                    android:textColor="@color/secondary_text"
                     app:layout_constraintStart_toEndOf="@+id/ivPopcorn"
                     app:layout_constraintTop_toTopOf="@+id/ivPopcorn"
                     app:layout_constraintBottom_toBottomOf="@+id/ivPopcorn"
                     android:gravity="center_vertical"
                     android:padding="4dp"
                     android:background="@drawable/shape_white_circle"
+                    style="@style/secondaryText"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -93,13 +91,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tv_show_detail_vote_count"
-                    android:textSize="@dimen/textSizeSubtitle"
                     android:textStyle="bold"
-                    android:textColor="@color/filmJoyPrimaryColorDark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:gravity="start"
                     android:padding="4dp"
+                    style="@style/secondaryText"
                     />
 
                 <TextView
@@ -107,14 +104,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text= "152"
-                    android:textSize="@dimen/textSizeSubtitle"
                     android:textStyle="bold"
-                    android:textColor="@color/secondary_text"
                     app:layout_constraintTop_toTopOf="@id/tvTvShowVoteCountDetail"
                     app:layout_constraintBottom_toBottomOf="@id/tvTvShowVoteCountDetail"
                     app:layout_constraintStart_toEndOf="@id/tvTvShowVoteCountDetail"
                     android:gravity="center_vertical"
                     android:padding="4dp"
+                    style="@style/secondaryText"
+                    android:textColor="@color/tagColor"
                     />
 
                 <TextView
@@ -122,28 +119,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text= "Lorem ipsum dolor sit amet.."
-                    android:textSize="@dimen/textSizeTitle"
                     android:textStyle="bold"
-                    android:textColor="@color/primary_text"
                     android:padding="18dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvTvShowFirstAirDate"
+                    style="@style/titleText"
                     />
 
                 <TextView
                     android:id="@+id/tvTvShowFirstAirDate"
+                    style="@style/secondaryText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text= "Lorem ipsum dolor sit amet.."
-                    android:textSize="@dimen/textSizeSubtitle"
-                    android:textColor="@color/secondary_text"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:gravity="end"
                     android:padding="8dp"
-
-                    />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Lorem ipsum dolor sit amet.." />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -152,9 +145,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text= "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                android:textSize="@dimen/textSizeTitle"
-                android:textColor="@color/primary_text"
                 android:padding="16dp"
+                style="@style/primaryText"
                 />
 
         </LinearLayout>
