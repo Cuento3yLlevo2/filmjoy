@@ -12,17 +12,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hermosotech.filmjoy.core.di.RoomModule.POPULAR_TV_SHOW_TABLE_NAME
 import com.hermosotech.filmjoy.core.di.RoomModule.TOP_RATED_TV_SHOW_TABLE_NAME
 import com.hermosotech.filmjoy.databinding.FragmentHomeBinding
+import com.hermosotech.filmjoy.domain.ApiConfiguration
 import com.hermosotech.filmjoy.domain.model.ApiConfig
-import com.hermosotech.filmjoy.domain.model.ImageConfig
 import com.hermosotech.filmjoy.domain.model.TvShow
 import com.hermosotech.filmjoy.ui.adapter.TvShowAdapter
-import com.hermosotech.filmjoy.ui.viewmodel.TvShowsViewModel
+import com.hermosotech.filmjoy.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private val tvShowsViewModel: TvShowsViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var apiConfig : ApiConfig
 
     private var _binding: FragmentHomeBinding? = null
@@ -41,34 +41,27 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvShowsViewModel.onCreate()
+        homeViewModel.onCreate()
 
-        tvShowsViewModel.apiConfiguration.observe(viewLifecycleOwner){
-            apiConfig = it
+        homeViewModel.popularTvShows.observe(viewLifecycleOwner) { tvShows ->
+            initRecycleView(tvShows, homeViewModel.apiConfiguration, binding.rvPopularTvShows, POPULAR_TV_SHOW_TABLE_NAME)
         }
 
-        tvShowsViewModel.popularTvShows.observe(viewLifecycleOwner) { tvShows ->
-            apiConfig.imageConfig?.let { imgConfig ->
-                initRecycleView(tvShows, imgConfig, binding.rvPopularTvShows, POPULAR_TV_SHOW_TABLE_NAME)
-            }
+        homeViewModel.topRatedTvShows.observe(viewLifecycleOwner) { tvShows ->
+            initRecycleView(tvShows, homeViewModel.apiConfiguration, binding.rvTopTvShows, TOP_RATED_TV_SHOW_TABLE_NAME)
         }
 
-        tvShowsViewModel.topRatedTvShows.observe(viewLifecycleOwner) { tvShows ->
-            apiConfig.imageConfig?.let { imgConfig ->
-                initRecycleView(tvShows, imgConfig, binding.rvTopTvShows, TOP_RATED_TV_SHOW_TABLE_NAME)
-            }
-        }
-
-        tvShowsViewModel.isLoading.observe(viewLifecycleOwner) {
+        homeViewModel.isLoading.observe(viewLifecycleOwner) {
             // todo progress bar
         }
 
     }
 
-    private fun initRecycleView(list: List<TvShow>, imgConfig: ImageConfig, rv: RecyclerView, tableName : String
+    private fun initRecycleView(
+        list: List<TvShow>, apiConfig: ApiConfiguration, rv: RecyclerView, tableName: String
     ) {
         rv.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        rv.adapter = TvShowAdapter(list, imgConfig) { tvShow ->
+        rv.adapter = TvShowAdapter(list, apiConfig) { tvShow ->
             onItemSelected(tvShow, tableName)
         }
     }

@@ -3,9 +3,7 @@ package com.hermosotech.filmjoy.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hermosotech.filmjoy.domain.GetApiConfiguration
-import com.hermosotech.filmjoy.domain.GetPopularTvShows
-import com.hermosotech.filmjoy.domain.GetTopRatedTvShows
+import com.hermosotech.filmjoy.domain.ApiConfiguration
 import com.hermosotech.filmjoy.domain.GetTvShowDetails
 import com.hermosotech.filmjoy.domain.model.ApiConfig
 import com.hermosotech.filmjoy.domain.model.TvShow
@@ -16,10 +14,9 @@ import javax.inject.Inject
 @HiltViewModel
 class TvShowDetailViewModel @Inject constructor(
     private val getTvShowDetails: GetTvShowDetails,
-    private val getApiConfiguration: GetApiConfiguration
+    val apiConfiguration: ApiConfiguration
 ): ViewModel() {
 
-    val apiConfiguration = MutableLiveData<ApiConfig>()
     val tvShow = MutableLiveData<TvShow>()
     val isLoading = MutableLiveData<Boolean>()
 
@@ -27,11 +24,7 @@ class TvShowDetailViewModel @Inject constructor(
         viewModelScope.launch {
             isLoading.postValue(true)
 
-            val apiConfig = getApiConfiguration()
-
-            apiConfig?.let {
-                apiConfiguration.postValue(it)
-            }
+            apiConfiguration()
 
             val result = getTvShowDetails(id, tableName)
 
