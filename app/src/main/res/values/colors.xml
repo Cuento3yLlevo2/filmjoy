@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="tagColor">#1DA611</color>
+
+    <!-- Day Color Palette -->
     <color name="filmJoyPrimaryColorDark">#3D239A</color>
     <color name="filmJoyPrimaryColor">#884cb4</color>
     <color name="filmJoySecondaryColor">#E5E5E6</color>
+    <color name="primaryText">#404145</color>
+    <color name="secondaryText">#62646a</color>
 
+    <!-- Night Color Palette -->
     <color name="filmJoyPrimaryColorDarkNight">#1A0F53</color>
     <color name="filmJoyPrimaryColorNight">#3E3853</color>
-
-    <color name="accentColor">#FA4588</color>
-    <color name="tagColor">#1DA611</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="primary_text">#404145</color>
-    <color name="secondary_text">#62646a</color>
+    <color name="textNight">#E5E5E6</color>
 </resources>

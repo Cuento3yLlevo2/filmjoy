@@ -1,9 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Application theme (Night) -->
     <style name="Theme.FilmJoy" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/filmJoyPrimaryColorDarkNight</item>
         <item name="colorPrimaryVariant">@color/black</item>
-        <item name="colorOnPrimary">@color/filmJoyPrimaryColorDarkNight</item>
+        <item name="colorOnPrimary">@color/filmJoySecondaryColor</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/filmJoyPrimaryColorDarkNight</item>
         <item name="colorSecondaryVariant">@color/filmJoyPrimaryColorDarkNight</item>
@@ -13,6 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- SplashScreen (Night) -->
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <!-- Set the splash screen background, animated icon, and animation duration. -->
         <item name="windowSplashScreenBackground">@color/filmJoyPrimaryColorDarkNight</item>
@@ -28,53 +30,49 @@
         <item name="postSplashScreenTheme">@style/Theme.FilmJoy</item>
     </style>
 
+    <!-- Text Styles (Night) START -->
+
     <style name="titleText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/filmJoySecondaryColor</item>
+        <item name="android:textColor">@color/textNight</item>
         <item name="android:textSize">@dimen/textSizeTitle</item>
     </style>
 
     <style name="sectionTitleText" parent="titleText">
-        <item name="android:textColor">@color/filmJoySecondaryColor</item>
+        <item name="android:textColor">@color/textNight</item>
     </style>
 
     <style name="primaryText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/filmJoySecondaryColor</item>
+        <item name="android:textColor">@color/textNight</item>
         <item name="android:textSize">@dimen/textSizeSubtitle</item>
     </style>
 
     <style name="secondaryText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/filmJoySecondaryColor</item>
+        <item name="android:textColor">@color/textNight</item>
         <item name="android:textSize">@dimen/textSizeNormal</item>
     </style>
 
     <style name="smallText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/filmJoySecondaryColor</item>
+        <item name="android:textColor">@color/textNight</item>
         <item name="android:textSize">@dimen/textSizeSmall</item>
     </style>
 
-    <style name="shapedLayout" parent="Theme.FilmJoy">
-        <item name="android:background">@drawable/shape_content_item_night</item>
-    </style>
+    <!-- Text Styles END -->
+
+    <!-- Widget Styles (Night) - START -->
 
     <style name="viewSeparator" parent="Theme.FilmJoy">
         <item name="android:background">@color/filmJoyPrimaryColorDarkNight</item>
     </style>
 
-    <style name="rvSeparator" parent="Theme.FilmJoy">
-        <item name="android:background">@color/filmJoyPrimaryColorDarkNight</item>
-    </style>
-
-    <style name="cardView" parent="CardView.Light">
-        <item name="android:background">@drawable/shape_content_item_night</item>
-    </style>
-
     <style name="actionBar" parent="Widget.AppCompat.ActionBar">
-        <item name="titleTextColor">@color/filmJoySecondaryColor</item>
+        <item name="titleTextColor">@color/textNight</item>
         <item name="android:background">@color/filmJoyPrimaryColorDarkNight</item>
     </style>
 
     <style name="logoImageActionBar" parent="Theme.FilmJoy">
         <item name="android:src">@drawable/filmjoy_logo_night_64px</item>
     </style>
+
+    <!-- Widget Styles (Night) - END -->
 
 </resources>

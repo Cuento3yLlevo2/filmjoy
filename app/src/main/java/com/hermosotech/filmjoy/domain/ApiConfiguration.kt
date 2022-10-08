@@ -37,6 +37,16 @@ class ApiConfiguration @Inject constructor(private val repository : TvShowReposi
         return null
     }
 
+    fun getLanguageTranslation(localeLanguage: String): String? {
+        return when(localeLanguage) {
+            "en" -> "en-US"
+            "es" -> "es-ES"
+            "ca" -> "ca-ES"
+            "" -> null
+            else -> "en-US"
+        }
+    }
+
     private fun getImageSize(wSizes: List<String>, minSize: Int?): String {
         minSize?.let {
             for (wSize in wSizes) {

@@ -18,13 +18,13 @@ class TvShowRepository @Inject constructor(
     private val tvShowDao: TvShowDao
     ) {
 
-    suspend fun getPopularTvShowsResponseFromApi(): TvShowsResponse? {
-        val response = api.getPopularTvShowList()
+    suspend fun getPopularTvShowsResponseFromApi(language: String? = null): TvShowsResponse? {
+        val response = api.getPopularTvShowList(language)
         return response.toDomain()
     }
 
-    suspend fun getTopRatedTvShowsResponseFromApi(): TvShowsResponse? {
-        val response = api.getTopRatedTvShowList()
+    suspend fun getTopRatedTvShowsResponseFromApi(language: String? = null): TvShowsResponse? {
+        val response = api.getTopRatedTvShowList(language)
         return response.toDomain()
     }
 

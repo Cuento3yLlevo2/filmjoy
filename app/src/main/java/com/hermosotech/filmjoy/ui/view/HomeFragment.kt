@@ -1,12 +1,12 @@
 package com.hermosotech.filmjoy.ui.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.splashscreen.SplashScreen
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeViewModel.onCreate()
+        homeViewModel.onCreate(view.context)
 
         homeViewModel.popularTvShows.observe(viewLifecycleOwner) { tvShows ->
             initRecycleView(tvShows, homeViewModel.apiConfiguration, binding.rvPopularTvShows, POPULAR_TV_SHOW_TABLE_NAME)
@@ -65,12 +65,20 @@ class HomeFragment : Fragment() {
     ) {
         rv.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         rv.adapter = TvShowAdapter(list, apiConfig) { tvShow ->
-            onItemSelected(tvShow, tableName)
+            onItemSelected(tvShow, tableName, context)
         }
     }
 
-    fun onItemSelected(tvShow: TvShow, tableName: String){
-        val action = HomeFragmentDirections.actionHomeFragmentToTvShowDetailFragment(tvShow.id, tableName, tvShow.name)
-        findNavController().navigate(action)
+    fun onItemSelected(tvShow: TvShow, tableName: String, context: Context?){
+        context?.let {
+            val action = HomeFragmentDirections.actionHomeFragmentToTvShowDetailFragment(
+                tvShowId = tvShow.id,
+                tableName = tableName,
+                tvShowName = tvShow.name,
+                language = homeViewModel.getCurrentLanguage(context)
+            )
+
+            findNavController().navigate(action)
+        }
     }
 }

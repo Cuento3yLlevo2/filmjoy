@@ -1,23 +1,20 @@
 package com.hermosotech.filmjoy.ui.view
 
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.hermosotech.filmjoy.databinding.FragmentTvShowDetailBinding
 import com.hermosotech.filmjoy.domain.ApiConfiguration
-import com.hermosotech.filmjoy.domain.model.ApiConfig
 import com.hermosotech.filmjoy.domain.model.TvShow
 import com.hermosotech.filmjoy.domain.model.formatFirstAirDate
 import com.hermosotech.filmjoy.ui.viewmodel.TvShowDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -46,10 +43,14 @@ class TvShowDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val tvShowId: Int = args.tvShowId
         val tableName: String = args.tableName
+        val language: String = args.language
+
+        if (language != tvShowDetailViewModel.getCurrentLanguage(view.context)) {
+            findNavController().navigateUp()
+        }
 
         if (tvShowId >= 0 && tableName.isNotEmpty()) {
             tvShowDetailViewModel.onCreate(tvShowId, tableName)
-
 
             tvShowDetailViewModel.tvShow.observe(viewLifecycleOwner) { tvShowResut ->
                 tvShow = tvShowResut
