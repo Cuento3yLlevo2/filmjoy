@@ -1,3 +1,9 @@
+## [1.1.0] - 2022-10-08
+### Added
+- Support for Horizontal and vertical Screen orientation.
+### Changed
+- Now `TvShow` details show `backdrop` inestead of `poster`.
+
 ## [1.0.2] - 2022-10-08
 ### Changed
 - Refactoring duplicated code.

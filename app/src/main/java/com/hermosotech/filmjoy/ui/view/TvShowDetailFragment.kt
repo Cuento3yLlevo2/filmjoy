@@ -54,7 +54,7 @@ class TvShowDetailFragment : Fragment() {
             tvShowDetailViewModel.tvShow.observe(viewLifecycleOwner) { tvShowResut ->
                 tvShow = tvShowResut
 
-                tvShowDetailViewModel.apiConfiguration.getImageURL(tvShow.posterPath, null, ApiConfiguration.ImageType.POSTER)?.let {
+                tvShowDetailViewModel.apiConfiguration.getImageURL(tvShow.backdropPath, null, ApiConfiguration.ImageType.BACKDROP)?.let {
                     Glide.with(binding.ivTvShowCoverImage.context).load(it).into(binding.ivTvShowCoverImage)
                 }
 
