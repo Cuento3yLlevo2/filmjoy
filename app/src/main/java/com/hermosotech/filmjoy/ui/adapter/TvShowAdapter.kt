@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hermosotech.filmjoy.R
-import com.hermosotech.filmjoy.domain.model.ImageConfig
+import com.hermosotech.filmjoy.domain.ApiConfiguration
 import com.hermosotech.filmjoy.domain.model.TvShow
 
 class TvShowAdapter(
     private val tvShowList: List<TvShow>,
-    private val imgConfig: ImageConfig,
+    private val apiConfig: ApiConfiguration,
     private val onClickListener: (TvShow) -> Unit
 ): RecyclerView.Adapter<TvShowViewHolder>() {
 
@@ -20,7 +20,7 @@ class TvShowAdapter(
 
     override fun onBindViewHolder(holder: TvShowViewHolder, position: Int) {
         val item = tvShowList[position]
-        holder.render(item, imgConfig, onClickListener)
+        holder.render(item, apiConfig, onClickListener)
     }
 
     override fun getItemCount(): Int = tvShowList.size
