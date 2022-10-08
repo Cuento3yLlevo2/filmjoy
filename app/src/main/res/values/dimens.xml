@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="cardCornerRadius">4dp</dimen>
-    <dimen name="toolbar_logo_dimen">40dp</dimen>
+    <dimen name="defaultMargin">16dp</dimen>
+    <dimen name="defaultPadding">8dp</dimen>
+
+    <!-- Text -->
     <dimen name="textSizeTitle">18sp</dimen>
     <dimen name="textSizeSubtitle">16sp</dimen>
     <dimen name="textSizeNormal">14sp</dimen>
     <dimen name="textSizeSmall">11sp</dimen>
+
+    <!-- App Bar -->
+    <dimen name="toolbar_logo_dimen">40dp</dimen>
+
+    <!-- Card View -->
+    <dimen name="cardCornerRadius">4dp</dimen>
     <dimen name="imageViewContentHeight">225dp</dimen>
+    <dimen name="popcornSize">24dp</dimen>
 </resources>

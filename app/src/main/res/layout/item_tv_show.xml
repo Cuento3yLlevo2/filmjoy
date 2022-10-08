@@ -30,8 +30,8 @@
 
         <ImageView
             android:id="@+id/ivPopcorn"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/popcornSize"
+            android:layout_height="@dimen/popcornSize"
             android:layout_margin="4dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,8 +76,8 @@
             android:ellipsize="end"
             android:maxLines="3"
             android:paddingTop="2dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:paddingStart="@dimen/defaultPadding"
+            android:paddingEnd="@dimen/defaultPadding"
             android:paddingBottom="4dp"
             style="@style/primaryText"
             />
@@ -87,8 +87,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text= "Feb 15, 2022"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:paddingStart="@dimen/defaultPadding"
+            android:paddingEnd="@dimen/defaultPadding"
             android:paddingBottom="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/clContentTitle"
