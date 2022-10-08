@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">FilmJoy</string>
-    <string name="cd_content_cover_image">Content cover image</string>
-    <string name="cd_popcorn_image">popcorn image</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="home_popular_tv_shows">Popular Tv Shows</string>
-    <string name="home_top_tv_shows">Top Rated Tv Shows</string>
-    <string name="cd_filmjoy_logo">FilmJoy Logo</string>
+    <string name="cd_content_cover_image" translatable="false">Content cover image</string>
+    <string name="cd_popcorn_image" translatable="false">popcorn image</string>
+    <string name="home_popular_tv_shows">Trending TV shows</string>
+    <string name="home_top_tv_shows">Top Rated TV shows</string>
+    <string name="cd_filmjoy_logo" translatable="false">FilmJoy Logo</string>
     <string name="tv_show_detail_vote_count">Vote count:</string>
 </resources>

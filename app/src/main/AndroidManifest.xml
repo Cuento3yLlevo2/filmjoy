@@ -17,6 +17,7 @@
         android:theme="@style/Theme.FilmJoy"
         tools:targetApi="31">
         <activity
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="fullSensor"
             android:name="com.hermosotech.filmjoy.ui.view.MainActivity"
             android:exported="true"

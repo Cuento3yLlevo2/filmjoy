@@ -7,8 +7,8 @@ import javax.inject.Inject
 
 class GetTopRatedTvShows @Inject constructor(private val repository : TvShowRepository) {
 
-    suspend operator fun invoke() : List<TvShow>? {
-        val tvShowsResponse = repository.getTopRatedTvShowsResponseFromApi()
+    suspend operator fun invoke(language: String? = null) : List<TvShow>? {
+        val tvShowsResponse = repository.getTopRatedTvShowsResponseFromApi(language)
 
         return if (tvShowsResponse?.results?.isNotEmpty() == true){
             repository.clearTopRatedTvShows()

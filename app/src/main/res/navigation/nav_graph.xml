@@ -22,6 +22,9 @@
             android:name="tvShowName"
             app:argType="string"
             android:defaultValue="Tv Show" />
+        <argument
+            android:name="language"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

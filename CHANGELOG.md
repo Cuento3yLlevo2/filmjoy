@@ -1,3 +1,7 @@
+## [1.3.0] - 2022-10-08
+### Added
+- Support multiple languages `en`, `es`, `ca`.
+
 ## [1.2.0] - 2022-10-08
 ### Added
 - Support for Dark Mode.

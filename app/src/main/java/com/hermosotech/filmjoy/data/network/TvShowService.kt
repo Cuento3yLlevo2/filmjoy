@@ -9,16 +9,16 @@ import javax.inject.Inject
 
 class TvShowService @Inject constructor(private val api : TvShowApiClient) {
 
-    suspend fun getPopularTvShowList() : TvShowsResponseModel {
+    suspend fun getPopularTvShowList(language: String? = null): TvShowsResponseModel {
         return withContext(Dispatchers.IO) {
-            val response = api.getPopularTvShowList()
+            val response = api.getPopularTvShowList(language = language)
             response.body() ?: TvShowsResponseModel(0, emptyList(), 0, 0)
         }
     }
 
-    suspend fun getTopRatedTvShowList() : TvShowsResponseModel {
+    suspend fun getTopRatedTvShowList(language: String? = null) : TvShowsResponseModel {
         return withContext(Dispatchers.IO) {
-            val response = api.getTopRatedTvShowList()
+            val response = api.getTopRatedTvShowList(language = language)
             response.body() ?: TvShowsResponseModel(0, emptyList(), 0, 0)
         }
     }
