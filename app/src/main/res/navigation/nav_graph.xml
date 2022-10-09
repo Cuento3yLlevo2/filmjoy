@@ -25,6 +25,9 @@
         <argument
             android:name="language"
             app:argType="string" />
+        <argument
+            android:name="uiMode"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

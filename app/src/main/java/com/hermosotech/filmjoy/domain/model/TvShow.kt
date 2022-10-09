@@ -26,8 +26,8 @@ data class TvShow(
 )
 
 fun TvShowModel.toDomain() = TvShow(posterPath, popularity, id, backdropPath, voteAverage, overview, firstAirDate, originCountry, genreIds, originalLanguage, voteCount, name, originalName)
-fun PopularTvShowEntity.toDomain() = TvShow(posterPath, popularity, id, backdropPath, voteAverage, overview, firstAirDate, listOf(originCountry), listOf(genreIds), originalLanguage, voteCount, name, originalName)
-fun TopRatedTvShowEntity.toDomain() = TvShow(posterPath, popularity, id, backdropPath, voteAverage, overview, firstAirDate, listOf(originCountry), listOf(genreIds), originalLanguage, voteCount, name, originalName)
+fun PopularTvShowEntity.toDomain() = TvShow(posterPath, popularity, id, backdropPath, voteAverage, overview, firstAirDate, originCountry, genreIds, originalLanguage, voteCount, name, originalName)
+fun TopRatedTvShowEntity.toDomain() = TvShow(posterPath, popularity, id, backdropPath, voteAverage, overview, firstAirDate, originCountry, genreIds, originalLanguage, voteCount, name, originalName)
 
 fun TvShow.formatFirstAirDate(pattern: String, locale: Locale = Locale.US): String {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

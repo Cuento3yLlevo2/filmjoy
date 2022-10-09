@@ -49,4 +49,22 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
+    <RelativeLayout
+        android:id="@+id/rlBaseHomeProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:visibility="invisible">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/filmJoyPrimaryColorDark"
+            />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

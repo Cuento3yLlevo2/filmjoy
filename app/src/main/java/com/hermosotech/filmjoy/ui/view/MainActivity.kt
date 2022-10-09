@@ -1,6 +1,11 @@
 package com.hermosotech.filmjoy.ui.view
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -28,6 +33,10 @@ class MainActivity: AppCompatActivity() {
 
         keepSplashScreenOnScreen(true)
 
+        if (isNetworkAvailable(this)) {
+            cacheDir.deleteRecursively()
+        }
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.findNavController()
 
@@ -40,4 +49,29 @@ class MainActivity: AppCompatActivity() {
     }
 
     fun keepSplashScreenOnScreen(keep: Boolean) = screenSplash.setKeepOnScreenCondition { keep }
+
+    fun keepProgressBarOnScreen(keep: Boolean) = run {
+        if (keep)
+            binding.rlBaseHomeProgressBar.visibility = View.VISIBLE
+        else
+            binding.rlBaseHomeProgressBar.visibility = View.INVISIBLE
+    }
+
+    private fun isNetworkAvailable(context: Context): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val cap = cm.getNetworkCapabilities(cm.activeNetwork) ?: return false
+            return cap.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        } else {
+            val networks = cm.allNetworks
+            for (n in networks) {
+                val nInfo = cm.getNetworkInfo(n)
+                if (nInfo != null && nInfo.isConnected) return true
+            }
+        }
+
+        return false
+    }
+
 }

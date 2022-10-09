@@ -1,3 +1,7 @@
+## [2.0.0] - 2022-10-10
+### Added
+- Support for Offline Mode.
+
 ## [1.3.0] - 2022-10-08
 ### Added
 - Support multiple languages `en`, `es`, `ca`.

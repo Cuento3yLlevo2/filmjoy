@@ -28,10 +28,10 @@ class GetPopularTvShowsTest {
     @Test
     fun `when the api does not return anything then get values from database`() = runBlocking {
         // Given
-        coEvery { tvShowRepository.getPopularTvShowsResponseFromApi() } returns TvShowsResponse(0, emptyList(), 0, 0)
+        coEvery { tvShowRepository.getPopularTvShowsResponseFromApi(null) } returns TvShowsResponse(0, emptyList(), 0, 0)
 
         // When
-        getPopularTvShows()
+        getPopularTvShows(null, null)
 
         // Then
         coVerify(exactly = 1) { tvShowRepository.getPopularTvShowsFromDatabase() }
@@ -60,10 +60,10 @@ class GetPopularTvShowsTest {
             )
         ), 50, 11)
 
-        coEvery { tvShowRepository.getPopularTvShowsResponseFromApi() } returns response
+        coEvery { tvShowRepository.getPopularTvShowsResponseFromApi(null) } returns response
 
         // When
-        val result = getPopularTvShows()
+        val result = getPopularTvShows(null, null)
 
         // Then
         coVerify(exactly = 1) { tvShowRepository.clearPopularTvShows() }
