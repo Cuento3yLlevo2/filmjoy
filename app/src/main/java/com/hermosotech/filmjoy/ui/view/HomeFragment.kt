@@ -2,11 +2,11 @@ package com.hermosotech.filmjoy.ui.view
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.splashscreen.SplashScreen
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -70,13 +70,14 @@ class HomeFragment : Fragment() {
         (activity as MainActivity).keepProgressBarOnScreen(false)
     }
 
-    fun onItemSelected(tvShow: TvShow, tableName: String, context: Context?){
+    private fun onItemSelected(tvShow: TvShow, tableName: String, context: Context?){
         context?.let {
             val action = HomeFragmentDirections.actionHomeFragmentToTvShowDetailFragment(
                 tvShowId = tvShow.id,
                 tableName = tableName,
                 tvShowName = tvShow.name,
-                language = homeViewModel.getCurrentLanguage(context)
+                language = homeViewModel.getCurrentLanguage(context),
+                uiMode = it.resources.configuration.uiMode
             )
 
             findNavController().navigate(action)

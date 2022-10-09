@@ -1,7 +1,7 @@
 package com.hermosotech.filmjoy.data.network
 
 import com.hermosotech.filmjoy.data.model.api.ApiConfigModel
-import com.hermosotech.filmjoy.data.model.api.ImageConfigModel
+import com.hermosotech.filmjoy.data.model.api.GenresReponseModel
 import com.hermosotech.filmjoy.data.model.api.TvShowsResponseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -27,6 +27,13 @@ class TvShowService @Inject constructor(private val api : TvShowApiClient) {
         return withContext(Dispatchers.IO) {
             val response = api.getApiConfig()
             response.body() ?: ApiConfigModel(null, emptyList())
+        }
+    }
+
+    suspend fun getGenresTv(language: String? = null): GenresReponseModel {
+        return withContext(Dispatchers.IO) {
+            val response = api.getGenresTv(language = language)
+            response.body() ?: GenresReponseModel(emptyList())
         }
     }
 }

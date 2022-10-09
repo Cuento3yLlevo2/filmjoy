@@ -1,13 +1,11 @@
 package com.hermosotech.filmjoy.data
 
 import com.hermosotech.filmjoy.data.database.dao.TvShowDao
+import com.hermosotech.filmjoy.data.database.entities.GenreEntity
 import com.hermosotech.filmjoy.data.database.entities.PopularTvShowEntity
 import com.hermosotech.filmjoy.data.database.entities.TopRatedTvShowEntity
 import com.hermosotech.filmjoy.data.network.TvShowService
-import com.hermosotech.filmjoy.domain.model.ApiConfig
-import com.hermosotech.filmjoy.domain.model.TvShow
-import com.hermosotech.filmjoy.domain.model.TvShowsResponse
-import com.hermosotech.filmjoy.domain.model.toDomain
+import com.hermosotech.filmjoy.domain.model.*
 import javax.inject.Inject
 
 /**
@@ -17,6 +15,8 @@ class TvShowRepository @Inject constructor(
     private val api: TvShowService,
     private val tvShowDao: TvShowDao
     ) {
+
+    // Calls to API
 
     suspend fun getPopularTvShowsResponseFromApi(language: String? = null): TvShowsResponse? {
         val response = api.getPopularTvShowList(language)
@@ -33,24 +33,36 @@ class TvShowRepository @Inject constructor(
         return response.toDomain()
     }
 
+    suspend fun getGenresTvFromApi(language: String? = null): List<Genre>? {
+        val response = api.getGenresTv(language)
+        return response.genres.map { it.toDomain() }
+    }
+
+    // Calls to DATABASE
+
     suspend fun getPopularTvShowsFromDatabase(): List<TvShow>? {
         val response = tvShowDao.getPopularTvShows()
-        return response.map { it.toDomain() }
+        return if(response.isNotEmpty()) response.map { it.toDomain() } else null
     }
 
     suspend fun getPopularTvShowByIdFromDatabase(id: Int): TvShow? {
         val response = tvShowDao.getPopularTvShowByID(id.toString())
-        return response[0].toDomain()
+        return response.getOrNull(0)?.toDomain()
     }
 
     suspend fun getTopRatedTvShowByIdFromDatabase(id: Int): TvShow? {
         val response = tvShowDao.getTopRatedTvShowByID(id.toString())
-        return response[0].toDomain()
+        return response.getOrNull(0)?.toDomain()
     }
 
     suspend fun getTopRatedTvShowsFromDatabase(): List<TvShow>? {
         val response = tvShowDao.getTopRatedTvShows()
-        return response.map { it.toDomain() }
+        return if(response.isNotEmpty()) response.map { it.toDomain() } else null
+    }
+
+    suspend fun getGenresFromDatabase(): List<Genre>? {
+        val response = tvShowDao.getGenres()
+        return if(response.isNotEmpty()) response.map { it.toDomain() } else null
     }
 
     suspend fun insertPopularTvShows(tvShows: List<PopularTvShowEntity>) {
@@ -61,11 +73,19 @@ class TvShowRepository @Inject constructor(
         tvShowDao.insertTopRatedTvShowsResponse(tvShows)
     }
 
+    suspend fun insertGenresTv(genres: List<GenreEntity>) {
+        tvShowDao.insertGenresTv(genres)
+    }
+
     suspend fun clearPopularTvShows() {
         tvShowDao.deletePopularTvShows()
     }
 
     suspend fun clearTopRatedTvShows() {
         tvShowDao.deleteTopRatedTvShows()
+    }
+
+    suspend fun clearGenresTv() {
+        tvShowDao.deleteGenresTv()
     }
 }

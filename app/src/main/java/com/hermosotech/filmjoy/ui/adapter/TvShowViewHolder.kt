@@ -1,5 +1,7 @@
 package com.hermosotech.filmjoy.ui.adapter
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -23,7 +25,10 @@ class TvShowViewHolder(view: View): RecyclerView.ViewHolder(view) {
         binding.tvContentVoteAverage.text = voteAverage
 
         apiConfig.getImageURL(tvShow.posterPath, 180, ApiConfiguration.ImageType.POSTER)?.let {
-            Glide.with(binding.ivContentCoverImage.context).load(it).into(binding.ivContentCoverImage)
+            Glide.with(binding.ivContentCoverImage.context)
+                .load(it)
+                .placeholder(ColorDrawable(Color.GRAY))
+                .into(binding.ivContentCoverImage)
         }
 
         itemView.setOnClickListener { onClickListener(tvShow) }

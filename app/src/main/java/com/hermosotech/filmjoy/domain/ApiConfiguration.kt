@@ -3,7 +3,9 @@ package com.hermosotech.filmjoy.domain
 import com.hermosotech.filmjoy.data.TvShowRepository
 import com.hermosotech.filmjoy.domain.model.ApiConfig
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ApiConfiguration @Inject constructor(private val repository : TvShowRepository) {
 
     enum class ImageType {
@@ -14,14 +16,15 @@ class ApiConfiguration @Inject constructor(private val repository : TvShowReposi
         STILL
     }
 
-    private var config: ApiConfig? = null
+    private var apiConfig: ApiConfig? = null
 
-    suspend operator fun invoke() {
-        config = repository.getApiConfigFromApi()
+
+    suspend fun getApiConfigFromApi() {
+        apiConfig = repository.getApiConfigFromApi()
     }
 
     fun getImageURL(imagePath: String?, minSize: Int? = null, imageType: ImageType): String? {
-        config?.imageConfig?.let { it ->
+        apiConfig?.imageConfig?.let { it ->
             val wSizes = when(imageType) {
                 ImageType.POSTER -> it.posterSizes
                 ImageType.BACKDROP -> it.backdropSizes

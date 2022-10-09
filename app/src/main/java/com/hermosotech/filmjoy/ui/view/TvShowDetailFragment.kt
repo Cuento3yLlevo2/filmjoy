@@ -1,5 +1,7 @@
 package com.hermosotech.filmjoy.ui.view
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,6 +26,7 @@ class TvShowDetailFragment : Fragment() {
     private val tvShowDetailViewModel: TvShowDetailViewModel by viewModels()
     private val args : TvShowDetailFragmentArgs by navArgs()
     private lateinit var tvShow : TvShow
+    private lateinit var genres : List<String>
 
     private var _binding: FragmentTvShowDetailBinding? = null
     // This property is only valid between onCreateView and
@@ -35,7 +38,9 @@ class TvShowDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as MainActivity).keepProgressBarOnScreen(true)
+        activity?.let {
+            (it as MainActivity).keepProgressBarOnScreen(true)
+        }
         _binding = FragmentTvShowDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -45,8 +50,9 @@ class TvShowDetailFragment : Fragment() {
         val tvShowId: Int = args.tvShowId
         val tableName: String = args.tableName
         val language: String = args.language
+        val uiMode: Int = args.uiMode
 
-        if (language != tvShowDetailViewModel.getCurrentLanguage(view.context)) {
+        if (language != tvShowDetailViewModel.getCurrentLanguage(view.context) || uiMode != view.context.resources.configuration.uiMode) {
             findNavController().navigateUp()
         }
 
@@ -56,8 +62,11 @@ class TvShowDetailFragment : Fragment() {
             tvShowDetailViewModel.tvShow.observe(viewLifecycleOwner) { tvShowResut ->
                 tvShow = tvShowResut
 
-                tvShowDetailViewModel.apiConfiguration.getImageURL(tvShow.backdropPath, null, ApiConfiguration.ImageType.BACKDROP)?.let {
-                    Glide.with(binding.ivTvShowCoverImage.context).load(it).into(binding.ivTvShowCoverImage)
+                tvShowDetailViewModel.getImageURL(tvShow.backdropPath, null, ApiConfiguration.ImageType.BACKDROP)?.let {
+                    Glide.with(binding.ivTvShowCoverImage.context)
+                        .load(it)
+                        .placeholder(ColorDrawable(Color.GRAY))
+                        .into(binding.ivTvShowCoverImage)
                 }
 
                 binding.tvTvShowFirstAirDate.text = tvShow.formatFirstAirDate("dd, MMM yyyy", Locale.US)
@@ -68,9 +77,17 @@ class TvShowDetailFragment : Fragment() {
                 binding.tvTvShowVoteAverage.text = voteAverage
                 binding.tvTvShowVoteCount.text = tvShow.voteCount.toString()
 
-                // tvShow.genreIds Todo call to api to retrieved genre by iD
+                if (tvShow.genreIds.isNotEmpty()) tvShowDetailViewModel.getGenresById(tvShow.genreIds)
 
-                (activity as MainActivity).keepProgressBarOnScreen(false)
+                activity?.let {
+                    (it as MainActivity).keepProgressBarOnScreen(false)
+                }
+            }
+
+            tvShowDetailViewModel.genres.observe(viewLifecycleOwner) { listOfGenres ->
+                genres = listOfGenres
+                val genresText = genres.joinToString(", ")
+                binding.tvTvShowGenres.text = genresText
             }
         }
     }

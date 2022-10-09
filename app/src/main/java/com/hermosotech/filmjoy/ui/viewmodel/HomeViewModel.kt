@@ -30,7 +30,8 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             isLoading.postValue(true)
             val language : String? = context?.let { localeManager.getCurrentLocate(context).language }
-            apiConfiguration()
+
+            apiConfiguration.getApiConfigFromApi()
 
             val popular = getPopularTvShows(language?.let { apiConfiguration.getLanguageTranslation(it) })
 

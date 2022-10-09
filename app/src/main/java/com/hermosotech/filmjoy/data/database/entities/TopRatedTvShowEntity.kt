@@ -19,8 +19,8 @@ data class TopRatedTvShowEntity(
     @ColumnInfo(name = "vote_average") val voteAverage: Double,
     @ColumnInfo(name = "overview") val overview: String,
     @ColumnInfo(name = "first_air_date") val firstAirDate: String,
-    @ColumnInfo(name = "origin_country") val originCountry: String, // for simplicity will only add one originCountry
-    @ColumnInfo(name = "genre_ids") val genreIds: Int, // for simplicity will only add one genreID
+    @ColumnInfo(name = "origin_country") val originCountry: List<String>,
+    @ColumnInfo(name = "genre_ids") val genreIds: List<Int>,
     @ColumnInfo(name = "original_language") val originalLanguage: String,
     @ColumnInfo(name = "vote_count") val voteCount: Int,
     @ColumnInfo(name = "name") val name: String,
@@ -28,5 +28,5 @@ data class TopRatedTvShowEntity(
 )
 
 fun TvShowsResponse.toDatabaseTopRated() = results.map { it.toDatabaseTopRated() }
-fun TvShow.toDatabaseTopRated() = TopRatedTvShowEntity(id, posterPath, popularity, backdropPath, voteAverage, overview, firstAirDate, originCountry[0], genreIds[0], originalLanguage, voteCount, name, originalName)
+fun TvShow.toDatabaseTopRated() = TopRatedTvShowEntity(id, posterPath, popularity, backdropPath, voteAverage, overview, firstAirDate, originCountry, genreIds, originalLanguage, voteCount, name, originalName)
 

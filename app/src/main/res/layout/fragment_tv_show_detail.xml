@@ -118,13 +118,28 @@
                     android:id="@+id/tvTvShowTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text= "Lorem ipsum dolor sit amet.."
+                    tools:text="Stranger Things"
                     android:textStyle="bold"
-                    android:padding="18dp"
+                    android:paddingStart="@dimen/defaultPadding"
+                    android:paddingEnd="@dimen/defaultPadding"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvTvShowFirstAirDate"
                     style="@style/titleText"
+                    />
+
+                <TextView
+                    android:id="@+id/tvTvShowGenres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text= "Drama, Sci-Fi, Mystery"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTvShowTitle"
+                    android:layout_marginStart="@dimen/defaultMargin"
+                    android:layout_marginEnd="@dimen/defaultMargin"
+                    style="@style/smallText"
+                    android:textColor="@color/tagColor"
                     />
 
                 <TextView
@@ -136,7 +151,7 @@
                     android:padding="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Lorem ipsum dolor sit amet.." />
+                    tools:text="Jul 15, 2016" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -144,7 +159,7 @@
                 android:id="@+id/tvTvShowDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text= "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                tools:text= "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl."
                 android:padding="16dp"
                 style="@style/primaryText"
                 />
