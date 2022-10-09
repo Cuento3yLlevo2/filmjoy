@@ -98,7 +98,7 @@ class TvShowDetailFragment : Fragment() {
                     }
                 }
 
-                binding.tvTvShowFirstAirDate.text = tvShow.formatFirstAirDate("dd, MMM yyyy", Locale.US)
+                binding.tvTvShowFirstAirDate.text = tvShow.formatFirstAirDate("dd, MMM yyyy", binding.tvTvShowFirstAirDate.textLocale)
 
                 val voteAverage = "${tvShow.voteAverage.roundToInt()}/10"
                 binding.tvTvShowTitle.text = tvShow.name

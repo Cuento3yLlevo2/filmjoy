@@ -24,7 +24,7 @@ class TvShowViewHolder(view: View): RecyclerView.ViewHolder(view) {
     fun render(tvShow: TvShow, imageHelper: ImageHelper, onClickListener: (TvShow) -> Unit) {
         binding.tvContentName.text = tvShow.name
 
-        binding.tvContentFirstAirDate.text = tvShow.formatFirstAirDate("dd, MMM yyyy", Locale.US)
+        binding.tvContentFirstAirDate.text = tvShow.formatFirstAirDate("dd, MMM yyyy", binding.tvContentFirstAirDate.textLocale)
 
         val voteAverage = "${tvShow.voteAverage.roundToInt()}/10"
         binding.tvContentVoteAverage.text = voteAverage
