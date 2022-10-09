@@ -1,24 +1,18 @@
 # FilmJoy
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/Cuento3yLlevo2/filmjoy)
 
 FilmJoy is an Android App that uses [ The Movie Database (TMDB) API](https://www.themoviedb.org/about) as content source to populate a list of the most popular and best rated tv shows available and show their details.
 
-![filmjoy demo gif](https://media.giphy.com/media/TapAlg10zAfDxXBltT/giphy.gif)
+![filmjoy demo gif](https://media.giphy.com/media/YsBhuqDUOzQiOcY6YN/giphy.gif)
 
 ## Functionality ##
 
-The app has two fragment layouts:
-* The first layout is the home where you can navigate a list of Tv shows and select one.
-* The second layout populates the details of the Tv Show selected.
-* Only supports portrait mode for Screen orientation.
-* Only supports Light Mode.
-* Only English Language Supported.
-
-### Upcoming versions:
-
-* Support for Dark Mode.
-* Support for Offline Mode.
+* You can navigate a list of Tv shows and select one.
+* The details of the Tv Show selected will appear afterwards.
 * Support for Horizontal and vertical Screen orientation.
-* Support for Spanish Language.
+* Has Light Mode & Dark Mode Themes (Depending on current device theme).
+* Support for Offline Mode if no internet available.
+* Languages supported: English, Espanish, Catalan (Depending on current device language).
 
 ## Architecture & Technologies used ##
 
