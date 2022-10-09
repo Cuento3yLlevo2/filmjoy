@@ -57,7 +57,7 @@ class TvShowDetailFragment : Fragment() {
         }
 
         if (tvShowId >= 0 && tableName.isNotEmpty()) {
-            tvShowDetailViewModel.onCreate(tvShowId, tableName)
+            tvShowDetailViewModel.onCreate(view.context, tvShowId, tableName)
 
             tvShowDetailViewModel.tvShow.observe(viewLifecycleOwner) { tvShowResut ->
                 tvShow = tvShowResut

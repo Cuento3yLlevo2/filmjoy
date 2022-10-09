@@ -29,16 +29,19 @@ class HomeViewModel @Inject constructor(
     fun onCreate(context: Context? = null) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            val language : String? = context?.let { localeManager.getCurrentLocate(context).language }
+            var language : String? = null
 
-            apiConfiguration.getApiConfigFromApi()
+            context?.let {
+                language = localeManager.getCurrentLocate(context).language
+            }
 
-            val popular = getPopularTvShows(language?.let { apiConfiguration.getLanguageTranslation(it) })
+            apiConfiguration.getApiConfigFromApi(context)
+            val popular = getPopularTvShows(context, language?.let { apiConfiguration.getLanguageTranslation(it) })
 
             popular?.let { popularShows ->
                 popularTvShows.postValue(popularShows)
 
-                val topRated = getTopRatedTvShows(language?.let { apiConfiguration.getLanguageTranslation(it) })
+                val topRated = getTopRatedTvShows(context, language?.let { apiConfiguration.getLanguageTranslation(it) })
 
                 topRated?.let { ratedShows ->
                     topRatedTvShows.postValue(ratedShows)

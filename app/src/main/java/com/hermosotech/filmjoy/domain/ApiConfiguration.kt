@@ -1,5 +1,6 @@
 package com.hermosotech.filmjoy.domain
 
+import android.content.Context
 import com.hermosotech.filmjoy.data.TvShowRepository
 import com.hermosotech.filmjoy.domain.model.ApiConfig
 import javax.inject.Inject
@@ -19,8 +20,12 @@ class ApiConfiguration @Inject constructor(private val repository : TvShowReposi
     private var apiConfig: ApiConfig? = null
 
 
-    suspend fun getApiConfigFromApi() {
-        apiConfig = repository.getApiConfigFromApi()
+    suspend fun getApiConfigFromApi(context: Context?) {
+        context?.let {
+            repository.getApiConfigFromApi(context)?.let {
+                apiConfig = it
+            }
+        }
     }
 
     fun getImageURL(imagePath: String?, minSize: Int? = null, imageType: ImageType): String? {

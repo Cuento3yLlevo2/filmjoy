@@ -52,13 +52,14 @@
     <RelativeLayout
         android:id="@+id/rlBaseHomeProgressBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:visibility="invisible">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/filmJoyPrimaryColorDark"
-            android:alpha="0.8"/>
+            />
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

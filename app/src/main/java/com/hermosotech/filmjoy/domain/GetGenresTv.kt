@@ -1,13 +1,14 @@
 package com.hermosotech.filmjoy.domain
 
+import android.content.Context
 import com.hermosotech.filmjoy.data.TvShowRepository
 import com.hermosotech.filmjoy.data.database.entities.toDatabase
 import javax.inject.Inject
 
 class GetGenresTv @Inject constructor(private val repository : TvShowRepository) {
 
-    suspend operator fun invoke(language: String? = null) {
-        val response = repository.getGenresTvFromApi(language)
+    suspend operator fun invoke(context: Context?, language: String? = null) {
+        val response = context?.let { repository.getGenresTvFromApi(it, language) }
 
         if (response?.isNotEmpty() == true){
             repository.clearGenresTv()

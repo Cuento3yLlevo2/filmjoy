@@ -24,10 +24,10 @@ class TvShowDetailViewModel @Inject constructor(
     val tvShow = MutableLiveData<TvShow>()
     val genres = MutableLiveData<List<String>>()
 
-    fun onCreate(id : Int, tableName: String) {
+    fun onCreate(context: Context? = null, id : Int, tableName: String) {
         viewModelScope.launch {
 
-            getGenresTv()
+            getGenresTv(context)
 
             val result = getTvShowDetails(id, tableName)
             result?.let {

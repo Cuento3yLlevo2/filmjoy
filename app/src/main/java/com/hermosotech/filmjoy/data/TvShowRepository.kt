@@ -1,5 +1,9 @@
 package com.hermosotech.filmjoy.data
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import com.hermosotech.filmjoy.data.database.dao.TvShowDao
 import com.hermosotech.filmjoy.data.database.entities.GenreEntity
 import com.hermosotech.filmjoy.data.database.entities.PopularTvShowEntity
@@ -7,6 +11,7 @@ import com.hermosotech.filmjoy.data.database.entities.TopRatedTvShowEntity
 import com.hermosotech.filmjoy.data.network.TvShowService
 import com.hermosotech.filmjoy.domain.model.*
 import javax.inject.Inject
+
 
 /**
  * This repository will have the logic to fetch the network results, manage the offline cache and to keep the database up-to-date.
@@ -16,26 +21,43 @@ class TvShowRepository @Inject constructor(
     private val tvShowDao: TvShowDao
     ) {
 
+    private fun isNetworkAvailable(context: Context): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val cap = cm.getNetworkCapabilities(cm.activeNetwork) ?: return false
+            return cap.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        } else {
+            val networks = cm.allNetworks
+            for (n in networks) {
+                val nInfo = cm.getNetworkInfo(n)
+                if (nInfo != null && nInfo.isConnected) return true
+            }
+        }
+
+        return false
+    }
+
     // Calls to API
 
-    suspend fun getPopularTvShowsResponseFromApi(language: String? = null): TvShowsResponse? {
-        val response = api.getPopularTvShowList(language)
-        return response.toDomain()
+    suspend fun getPopularTvShowsResponseFromApi(context: Context, language: String? = null): TvShowsResponse? {
+        val response = if (isNetworkAvailable(context)) api.getPopularTvShowList(language) else null
+        return response?.toDomain()
     }
 
-    suspend fun getTopRatedTvShowsResponseFromApi(language: String? = null): TvShowsResponse? {
-        val response = api.getTopRatedTvShowList(language)
-        return response.toDomain()
+    suspend fun getTopRatedTvShowsResponseFromApi(context: Context, language: String? = null): TvShowsResponse? {
+        val response = if (isNetworkAvailable(context)) api.getTopRatedTvShowList(language) else null
+        return response?.toDomain()
     }
 
-    suspend fun getApiConfigFromApi(): ApiConfig? {
-        val response = api.getApiConfig()
-        return response.toDomain()
+    suspend fun getApiConfigFromApi(context: Context): ApiConfig? {
+        val response = if (isNetworkAvailable(context)) api.getApiConfig() else null
+        return response?.toDomain()
     }
 
-    suspend fun getGenresTvFromApi(language: String? = null): List<Genre>? {
-        val response = api.getGenresTv(language)
-        return response.genres.map { it.toDomain() }
+    suspend fun getGenresTvFromApi(context: Context, language: String? = null): List<Genre>? {
+        val response = if (isNetworkAvailable(context)) api.getGenresTv(language) else null
+        return response?.genres?.map { it.toDomain() }
     }
 
     // Calls to DATABASE
