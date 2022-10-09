@@ -1,19 +1,15 @@
 package com.hermosotech.filmjoy.ui.viewmodel
 
-import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.hermosotech.filmjoy.core.LocaleManager
-import com.hermosotech.filmjoy.domain.ApiConfiguration
+import com.hermosotech.filmjoy.core.ImageHelper
 import com.hermosotech.filmjoy.domain.GetPopularTvShows
 import com.hermosotech.filmjoy.domain.GetTopRatedTvShows
-import com.hermosotech.filmjoy.domain.model.ApiConfig
 import com.hermosotech.filmjoy.domain.model.TvShow
 import com.hermosotech.filmjoy.domain.model.TvShowsResponse
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
-import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.resetMain
@@ -34,7 +30,7 @@ class HomeViewModelTest {
     private lateinit var getTopRatedTvShows: GetTopRatedTvShows
 
     @RelaxedMockK
-    private lateinit var apiConfiguration: ApiConfiguration
+    private lateinit var apiConfiguration: ImageHelper
 
     @RelaxedMockK
     private lateinit var localeManager: LocaleManager
@@ -80,7 +76,7 @@ class HomeViewModelTest {
             ), 50, 11
         )
 
-        coEvery { getPopularTvShows() } returns response.results
+        coEvery { getPopularTvShows(null, null) } returns response.results
 
         //When
         homeViewModel.onCreate(null)

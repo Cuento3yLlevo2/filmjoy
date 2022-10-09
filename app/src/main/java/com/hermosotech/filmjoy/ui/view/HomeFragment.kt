@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hermosotech.filmjoy.core.di.RoomModule.POPULAR_TV_SHOW_TABLE_NAME
 import com.hermosotech.filmjoy.core.di.RoomModule.TOP_RATED_TV_SHOW_TABLE_NAME
 import com.hermosotech.filmjoy.databinding.FragmentHomeBinding
-import com.hermosotech.filmjoy.domain.ApiConfiguration
-import com.hermosotech.filmjoy.domain.model.ApiConfig
+import com.hermosotech.filmjoy.core.ImageHelper
 import com.hermosotech.filmjoy.domain.model.TvShow
 import com.hermosotech.filmjoy.ui.adapter.TvShowAdapter
 import com.hermosotech.filmjoy.ui.viewmodel.HomeViewModel
@@ -25,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
-    private lateinit var apiConfig : ApiConfig
 
     private var _binding: FragmentHomeBinding? = null
     private var splashScreen:  SplashScreen? = null
@@ -47,11 +45,11 @@ class HomeFragment : Fragment() {
         homeViewModel.onCreate(view.context)
 
         homeViewModel.popularTvShows.observe(viewLifecycleOwner) { tvShows ->
-            initRecycleView(tvShows, homeViewModel.apiConfiguration, binding.rvPopularTvShows, POPULAR_TV_SHOW_TABLE_NAME)
+            initRecycleView(tvShows, homeViewModel.imageHelper, binding.rvPopularTvShows, POPULAR_TV_SHOW_TABLE_NAME)
         }
 
         homeViewModel.topRatedTvShows.observe(viewLifecycleOwner) { tvShows ->
-            initRecycleView(tvShows, homeViewModel.apiConfiguration, binding.rvTopTvShows, TOP_RATED_TV_SHOW_TABLE_NAME)
+            initRecycleView(tvShows, homeViewModel.imageHelper, binding.rvTopTvShows, TOP_RATED_TV_SHOW_TABLE_NAME)
         }
 
         homeViewModel.isLoading.observe(viewLifecycleOwner) {
@@ -61,10 +59,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun initRecycleView(
-        list: List<TvShow>, apiConfig: ApiConfiguration, rv: RecyclerView, tableName: String
+        list: List<TvShow>, imageHelper: ImageHelper, rv: RecyclerView, tableName: String
     ) {
         rv.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        rv.adapter = TvShowAdapter(list, apiConfig) { tvShow ->
+        rv.adapter = TvShowAdapter(list, imageHelper) { tvShow ->
             onItemSelected(tvShow, tableName, context)
         }
         (activity as MainActivity).keepProgressBarOnScreen(false)

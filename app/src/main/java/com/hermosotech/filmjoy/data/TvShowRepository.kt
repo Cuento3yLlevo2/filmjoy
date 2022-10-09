@@ -38,25 +38,54 @@ class TvShowRepository @Inject constructor(
         return false
     }
 
+    private fun getLanguageTranslation(localeLanguage: String?): String {
+        return when(localeLanguage) {
+            "en" -> "en-US"
+            "es" -> "es-ES"
+            "ca" -> "ca-ES"
+            else -> "en-US"
+        }
+    }
+
     // Calls to API
 
-    suspend fun getPopularTvShowsResponseFromApi(context: Context, language: String? = null): TvShowsResponse? {
-        val response = if (isNetworkAvailable(context)) api.getPopularTvShowList(language) else null
+    suspend fun getPopularTvShowsResponseFromApi(context: Context?, language: String? = null): TvShowsResponse? {
+        val response =
+            if (context?.let { isNetworkAvailable(it) } == true)
+                api.getPopularTvShowList(getLanguageTranslation(language))
+            else
+                null
+
         return response?.toDomain()
     }
 
-    suspend fun getTopRatedTvShowsResponseFromApi(context: Context, language: String? = null): TvShowsResponse? {
-        val response = if (isNetworkAvailable(context)) api.getTopRatedTvShowList(language) else null
+    suspend fun getTopRatedTvShowsResponseFromApi(context: Context?, language: String? = null): TvShowsResponse? {
+        val response =
+            if (context?.let { isNetworkAvailable(it) } == true)
+                api.getTopRatedTvShowList(getLanguageTranslation(language))
+            else
+                null
+
         return response?.toDomain()
     }
 
-    suspend fun getApiConfigFromApi(context: Context): ApiConfig? {
-        val response = if (isNetworkAvailable(context)) api.getApiConfig() else null
+    suspend fun getApiConfigFromApi(context: Context?): ApiConfig? {
+        val response =
+            if (context?.let { isNetworkAvailable(it) } == true)
+                api.getApiConfig()
+            else
+                null
+
         return response?.toDomain()
     }
 
-    suspend fun getGenresTvFromApi(context: Context, language: String? = null): List<Genre>? {
-        val response = if (isNetworkAvailable(context)) api.getGenresTv(language) else null
+    suspend fun getGenresTvFromApi(context: Context?, language: String? = null): List<Genre>? {
+        val response =
+            if (context?.let { isNetworkAvailable(it) } == true)
+                api.getGenresTv(getLanguageTranslation(language))
+            else
+                null
+
         return response?.genres?.map { it.toDomain() }
     }
 

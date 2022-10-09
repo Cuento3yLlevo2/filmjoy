@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetPopularTvShows @Inject constructor(private val repository : TvShowRepository) {
 
     suspend operator fun invoke(context: Context?, language: String? = null): List<TvShow>? {
-        val tvShowsResponse = context?.let { repository.getPopularTvShowsResponseFromApi(it, language) }
+        val tvShowsResponse = repository.getPopularTvShowsResponseFromApi(context, language)
 
         return if (tvShowsResponse?.results?.isNotEmpty() == true){
             repository.clearPopularTvShows()

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hermosotech.filmjoy.core.LocaleManager
-import com.hermosotech.filmjoy.domain.ApiConfiguration
+import com.hermosotech.filmjoy.core.ImageHelper
 import com.hermosotech.filmjoy.domain.GetPopularTvShows
 import com.hermosotech.filmjoy.domain.GetTopRatedTvShows
 import com.hermosotech.filmjoy.domain.model.TvShow
@@ -18,7 +18,7 @@ class HomeViewModel @Inject constructor(
     private val localeManager: LocaleManager,
     private val getPopularTvShows: GetPopularTvShows,
     private val getTopRatedTvShows: GetTopRatedTvShows,
-    val apiConfiguration: ApiConfiguration
+    val imageHelper: ImageHelper
 ): ViewModel() {
 
     val popularTvShows = MutableLiveData<List<TvShow>>()
@@ -35,13 +35,13 @@ class HomeViewModel @Inject constructor(
                 language = localeManager.getCurrentLocate(context).language
             }
 
-            apiConfiguration.getApiConfigFromApi(context)
-            val popular = getPopularTvShows(context, language?.let { apiConfiguration.getLanguageTranslation(it) })
+            imageHelper.getApiConfigFromApi(context)
+            val popular = getPopularTvShows(context, language)
 
             popular?.let { popularShows ->
                 popularTvShows.postValue(popularShows)
 
-                val topRated = getTopRatedTvShows(context, language?.let { apiConfiguration.getLanguageTranslation(it) })
+                val topRated = getTopRatedTvShows(context, language)
 
                 topRated?.let { ratedShows ->
                     topRatedTvShows.postValue(ratedShows)

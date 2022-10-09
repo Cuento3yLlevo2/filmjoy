@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetGenresTv @Inject constructor(private val repository : TvShowRepository) {
 
     suspend operator fun invoke(context: Context?, language: String? = null) {
-        val response = context?.let { repository.getGenresTvFromApi(it, language) }
+        val response = repository.getGenresTvFromApi(context, language)
 
         if (response?.isNotEmpty() == true){
             repository.clearGenresTv()

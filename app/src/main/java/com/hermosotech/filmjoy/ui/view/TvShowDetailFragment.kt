@@ -1,7 +1,10 @@
 package com.hermosotech.filmjoy.ui.view
 
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,8 +14,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.hermosotech.filmjoy.databinding.FragmentTvShowDetailBinding
-import com.hermosotech.filmjoy.domain.ApiConfiguration
+import com.hermosotech.filmjoy.core.ImageHelper
 import com.hermosotech.filmjoy.domain.model.TvShow
 import com.hermosotech.filmjoy.domain.model.formatFirstAirDate
 import com.hermosotech.filmjoy.ui.viewmodel.TvShowDetailViewModel
@@ -62,11 +67,35 @@ class TvShowDetailFragment : Fragment() {
             tvShowDetailViewModel.tvShow.observe(viewLifecycleOwner) { tvShowResut ->
                 tvShow = tvShowResut
 
-                tvShowDetailViewModel.getImageURL(tvShow.backdropPath, null, ApiConfiguration.ImageType.BACKDROP)?.let {
-                    Glide.with(binding.ivTvShowCoverImage.context)
-                        .load(it)
-                        .placeholder(ColorDrawable(Color.GRAY))
-                        .into(binding.ivTvShowCoverImage)
+                tvShow.backdropPath?.let { path ->
+
+                    tvShowDetailViewModel.getBitmapFileFromStorageOrNull(binding.ivTvShowCoverImage.context, path)?.let { file ->
+                        Glide.with(binding.ivTvShowCoverImage.context)
+                            .load(Uri.fromFile(file))
+                            .placeholder(ColorDrawable(Color.GRAY))
+                            .into(binding.ivTvShowCoverImage)
+                    } ?: run {
+                        var bitmap : Bitmap? = null
+
+                        tvShowDetailViewModel.getImageURL(path, null, ImageHelper.ImageType.BACKDROP)?.let { apiImageURL ->
+
+                            Glide.with(binding.ivTvShowCoverImage.context)
+                                .asBitmap()
+                                .load(apiImageURL)
+                                .placeholder(ColorDrawable(Color.GRAY))
+                                .into(object : CustomTarget<Bitmap>(){
+                                    override fun onLoadCleared(placeholder: Drawable?) {}
+                                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                                        bitmap = resource
+                                        binding.ivTvShowCoverImage.setImageBitmap(bitmap)
+                                    }
+                                })
+
+                            bitmap?.let { image ->
+                                tvShowDetailViewModel.storageBitmapInCacheDir(binding.ivTvShowCoverImage.context, path, image)
+                            }
+                        }
+                    }
                 }
 
                 binding.tvTvShowFirstAirDate.text = tvShow.formatFirstAirDate("dd, MMM yyyy", Locale.US)

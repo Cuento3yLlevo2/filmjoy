@@ -14,13 +14,13 @@ import com.hermosotech.filmjoy.data.database.entities.TopRatedTvShowEntity
  */
 interface TvShowDao {
 
-    @Query("SELECT * FROM popular_tv_shows_table")
+    @Query("SELECT * FROM popular_tv_shows_table ORDER BY popularity DESC")
     suspend fun getPopularTvShows(): List<PopularTvShowEntity>
 
     @Query("SELECT * FROM popular_tv_shows_table WHERE id=:id")
     suspend fun getPopularTvShowByID(id: String): List<PopularTvShowEntity>
 
-    @Query("SELECT * FROM top_rated_tv_shows_table")
+    @Query("SELECT * FROM top_rated_tv_shows_table ORDER BY vote_average DESC")
     suspend fun getTopRatedTvShows(): List<TopRatedTvShowEntity>
 
     @Query("SELECT * FROM top_rated_tv_shows_table WHERE id=:id")
